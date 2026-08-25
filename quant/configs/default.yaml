@@ -1,0 +1,53 @@
+# Personal quant stack — edit this file, do not hard-code secrets here.
+paths:
+  root: ./var
+  lake: ./var/lake
+  reports: ./var/reports
+  paper_db: ./var/paper.sqlite
+
+universe:
+  name: demo
+  source: synthetic
+  symbols: [AAA, BBB, CCC]
+  start: "2018-01-01"
+  end: null
+  adjust: qfq   # A-share only: qfq / hfq / none
+
+data:
+  # yfinance | akshare | ccxt | csv | synthetic
+  default_source: synthetic
+  csv_dir: ./data/csv
+  ccxt_exchange: binance
+  ccxt_timeframe: 1d
+
+backtest:
+  initial_cash: 100000.0
+  commission: 0.001
+  slippage: 0.0005
+  execution: next_open   # next_open | close
+  annualization: 252
+
+paper:
+  initial_cash: 100000.0
+  commission: 0.001
+  slippage: 0.0005
+  fill: close            # close | next_open
+
+risk:
+  max_gross_exposure: 1.0
+  max_weight: 0.35
+  max_daily_loss: 0.03
+  cash_buffer: 0.02
+
+strategy:
+  name: sma
+  params:
+    fast: 20
+    slow: 60
+    # momentum
+    lookback: 63
+    top_k: 2
+    # mean reversion
+    window: 20
+    entry_z: 1.0
+    exit_z: 0.25

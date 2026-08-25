@@ -1,0 +1,54 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "qsys"
+version = "0.1.0"
+description = "Personal quant stack assembled from open-source libraries"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "kylin985ti" }]
+dependencies = [
+  "pandas>=2.1",
+  "numpy>=1.26",
+  "pyarrow>=14",
+  "pydantic>=2.6",
+  "pydantic-settings>=2.2",
+  "typer>=0.12",
+  "pyyaml>=6.0",
+  "rich>=13.7",
+]
+
+[project.optional-dependencies]
+us = ["yfinance>=0.2.40"]
+china = ["akshare>=1.14"]
+crypto = ["ccxt>=4.3"]
+report = ["quantstats>=0.0.62", "matplotlib>=3.8"]
+ui = ["streamlit>=1.36"]
+dev = ["pytest>=8.0"]
+all = [
+  "yfinance>=0.2.40",
+  "akshare>=1.14",
+  "ccxt>=4.3",
+  "quantstats>=0.0.62",
+  "matplotlib>=3.8",
+  "streamlit>=1.36",
+  "pytest>=8.0",
+]
+
+[project.scripts]
+qsys = "qsys.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
