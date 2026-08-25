@@ -16,8 +16,8 @@ def test_paper_step_opens_positions(cfg_path, tmp_path):
     assert snap.equity > 0
     assert not snap.positions.empty
     assert snap.cash < ctx.cfg.paper.initial_cash
-    broker = PaperBroker(tmp_path / "paper.sqlite")
-    # independent broker starts empty
+    broker = PaperBroker(tmp_path / "other.sqlite")
+    # a different ledger starts empty
     assert broker.positions().empty
 
 
